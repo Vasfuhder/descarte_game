@@ -1,0 +1,26 @@
+[gd_scene format=2]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer"]
+margin_left = 515.0
+margin_top = 345.0
+margin_right = 765.0
+margin_bottom = 375.0
+rect_min_size = Vector2( 250, 30 )
+text = "SEU DISPOSITIVO NÃO É COMPATÍVEL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
