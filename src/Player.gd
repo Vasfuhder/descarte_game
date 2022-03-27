@@ -9,12 +9,10 @@ func _ready():
 	self.set_position(self.get_parent().get_node("Casas/Area2D"+str(pos)+"/CollisionShape2D").position)
 
 func _on_Button_mudar_posicao(acao, posi):
-	#desativando o botao jogar dados
-	self.get_parent().get_node("Button").disabled = true
 	
 	#verificacoes
 	if ((self.pos + posi) >= 30) && (acao == "avancar"): posi = 30 - self.pos
-	if((self.pos - posi) <= 0) && (acao == "voltar"): posi = 0
+	if((self.pos - posi) <= 0) && (acao == "voltar"): posi = self.pos
 	
 	for i in range(posi):
 		if acao == "avancar": pos+=1

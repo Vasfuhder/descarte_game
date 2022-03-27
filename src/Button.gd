@@ -22,6 +22,9 @@ func preparar_perguntas():
 	perguntas.shuffle()
 
 func _button_pressed() -> void:
+	#desativando botão
+	self.disabled = true
+	
 	var valor_dado = int(rng.randf_range(1,GameVariables.MAX_DICE+1))
 	
 	#animação dos dados sendo lançados e espera de 1 segundo antes da pergunta
@@ -30,7 +33,6 @@ func _button_pressed() -> void:
 	
 	#pergunta aleatoria
 	gerar_pergunta(valor_dado)
-	pass
 
 func gerar_animacao(frames: int):
 	var gen_frames: Array = []
@@ -73,7 +75,8 @@ func gerar_pergunta(valor_dado) -> void:
 	var pergunta = self.perguntas[indice]
 	self.perguntas.pop_at(indice)
 	var instance = pergunta_scene.instance()
-	instance.get_node("RichTextLabel").text = pergunta["pergunta"]
+	instance.get_node("RichTextLabel").bbcode_enabled = true
+	instance.get_node("RichTextLabel").bbcode_text = "[center]"+pergunta["pergunta"]+"[/center]"
 	
 	for i in range(pergunta["respostas"].size()):
 		var button = Button.new()
@@ -106,4 +109,3 @@ func on_Button_pressed(text, pergunta, valor_dado):
 		self.get_parent().get_parent().get_node("Resultado").queue_free()
 		emit_signal("mudar_posicao", "voltar", voltar)
 		GameVariables.erros += 1
-		

@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://fontes/Roboto_Condensed/RobotoCondensed-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://texturas/menu/background.png" type="Texture" id=1]
 [ext_resource path="res://b_play.gd" type="Script" id=2]
 [ext_resource path="res://src/startup.gd" type="Script" id=3]
 [ext_resource path="res://texturas/menu/um jogador/normal.png" type="Texture" id=4]
@@ -15,10 +15,8 @@
 [ext_resource path="res://texturas/menu/opcoes/disabled.png" type="Texture" id=13]
 [ext_resource path="res://texturas/menu/opcoes/normal.png" type="Texture" id=14]
 [ext_resource path="res://texturas/menu/opcoes/pressed.png" type="Texture" id=15]
-
-[sub_resource type="DynamicFont" id=1]
-size = 92
-font_data = ExtResource( 1 )
+[ext_resource path="res://texturas/menu/mask.bmp" type="BitMap" id=16]
+[ext_resource path="res://texturas/menu/moldura.png" type="Texture" id=17]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -28,18 +26,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+texture = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.199219
+anchor_top = 0.0180556
+anchor_right = 0.710938
+anchor_bottom = 0.9875
+margin_left = 64.0
+margin_right = 64.0
+rect_scale = Vector2( 0.95, 0.95 )
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 498.0
+margin_left = 537.394
 margin_top = 285.0
-margin_right = 801.0
-margin_bottom = 431.0
+margin_right = 1085.39
+margin_bottom = 848.0
 rect_scale = Vector2( 0.5, 0.5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,6 +62,9 @@ margin_right = 548.0
 margin_bottom = 185.0
 custom_constants/margin_top = 10
 custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Button" type="TextureButton" parent="VBoxContainer/MarginContainer"]
 margin_top = 10.0
@@ -59,7 +74,11 @@ texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
 texture_disabled = ExtResource( 7 )
+texture_click_mask = ExtResource( 16 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 189.0
@@ -67,6 +86,9 @@ margin_right = 548.0
 margin_bottom = 374.0
 custom_constants/margin_top = 10
 custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Button" type="TextureButton" parent="VBoxContainer/MarginContainer2"]
 margin_top = 10.0
@@ -77,44 +99,29 @@ texture_normal = ExtResource( 10 )
 texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 9 )
 texture_disabled = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
 margin_top = 378.0
 margin_right = 548.0
-margin_bottom = 569.0
+margin_bottom = 563.0
 custom_constants/margin_top = 10
 custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Button" type="TextureButton" parent="VBoxContainer/MarginContainer3"]
 margin_top = 10.0
 margin_right = 548.0
-margin_bottom = 181.0
+margin_bottom = 175.0
 disabled = true
 texture_normal = ExtResource( 14 )
 texture_pressed = ExtResource( 15 )
 texture_hover = ExtResource( 12 )
 texture_disabled = ExtResource( 13 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 315.0
-margin_top = 75.0
-margin_right = 1022.0
-margin_bottom = 223.0
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-custom_fonts/normal_font = SubResource( 1 )
-text = "Descarte Game :)"
 __meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-margin_left = 913.0
-margin_top = 194.0
-margin_right = 1014.0
-margin_bottom = 225.0
-rect_rotation = -28.0423
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "Alpha"
-__meta__ = {
-"_edit_use_anchors_": false
+"_edit_group_": true
 }
