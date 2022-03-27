@@ -1,5 +1,7 @@
 extends Button
 
+signal mudar_posicao
+
 var rng = RandomNumberGenerator.new()
 onready var pergunta_scene = preload("res://pergunta.tscn")
 onready var resultado_scene = preload("res://resultado.tscn")
@@ -19,23 +21,49 @@ func preparar_perguntas():
 		perguntas.append(v)
 	perguntas.shuffle()
 
-func penalizar(voltar):
-	var position = self.get_parent().get_node("player").pos
-	position = position-voltar
-	clamp(position, 0, 30)
-	self.get_parent().get_node("player").pos = position
-	pass
-
 func _button_pressed() -> void:
 	var valor_dado = int(rng.randf_range(1,GameVariables.MAX_DICE+1))
-	#animação dos dados sendo lançados
-	jogar_dados(valor_dado)
+	
+	#animação dos dados sendo lançados e espera de 1 segundo antes da pergunta
+	yield(jogar_dados(valor_dado), "completed")
+	yield(get_tree().create_timer(1), "timeout")
 	
 	#pergunta aleatoria
 	gerar_pergunta(valor_dado)
 	pass
 
+func gerar_animacao(frames: int):
+	var gen_frames: Array = []
+	var i = 0
+	var limit = 7
+	while i <= limit:
+		var random = rng.randi_range(0, frames+1)
+		if gen_frames.find(random) == -1:
+			gen_frames.append(random)
+			i += 1
+	return gen_frames
+
 func jogar_dados(valor_dado: int):
+	var frame
+	match valor_dado:
+			1: frame = 49
+			2: frame = 53
+			3: frame = 113
+			4: frame = 0
+			5: frame = 61
+			6: frame = 57
+
+	var dado = self.get_parent().get_node("AnimatedSprite")
+	var animacao = gerar_animacao(dado.frames.get_frame_count("default"))
+	var tween = self.get_parent().get_node("Tween")
+	var size_array = [0, 0.2, 0.5, 1.0, -1.0, -0.5, -0.2]
+	for i in range(7):
+		tween.interpolate_property(dado, "scale", dado.scale, Vector2(dado.scale.x+size_array[i], dado.scale.y+size_array[i]), 0.1, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		tween.start()
+		dado.frame = animacao[i]
+		yield(get_tree().create_timer(0.07), "timeout")
+	dado.frame = frame
+	
 	self.get_parent().get_node("dados").set_text("Dados: "+str(valor_dado))
 	pass
 	
@@ -66,7 +94,7 @@ func on_Button_pressed(text, pergunta, valor_dado):
 		self.get_parent().get_parent().add_child(instance)
 		yield(get_tree().create_timer(2), "timeout")
 		self.get_parent().get_parent().get_node("Resultado").queue_free()
-		self.get_parent().get_node("player").pos += valor_dado
+		emit_signal("mudar_posicao", "avancar", valor_dado)
 		GameVariables.acertos += 1
 	else:
 		var gd = GameVariables.dificuldade[GameVariables.game_mode]
@@ -76,6 +104,6 @@ func on_Button_pressed(text, pergunta, valor_dado):
 		self.get_parent().get_parent().add_child(instance)
 		yield(get_tree().create_timer(2), "timeout")
 		self.get_parent().get_parent().get_node("Resultado").queue_free()
+		emit_signal("mudar_posicao", "voltar", voltar)
 		GameVariables.erros += 1
-		penalizar(voltar)
 		

@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 func _pressed():
 	GameVariables.game_mode = GameVariables.SINGLE_PLAYER
