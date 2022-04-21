@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://texturas/menu/background.png" type="Texture" id=1]
 [ext_resource path="res://b_play.gd" type="Script" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://texturas/menu/opcoes/disabled.png" type="Texture" id=13]
 [ext_resource path="res://texturas/menu/opcoes/normal.png" type="Texture" id=14]
 [ext_resource path="res://texturas/menu/opcoes/pressed.png" type="Texture" id=15]
-[ext_resource path="res://texturas/menu/mask.bmp" type="BitMap" id=16]
 [ext_resource path="res://texturas/menu/moldura.png" type="Texture" id=17]
 
 [node name="Control" type="Control"]
@@ -74,7 +73,6 @@ texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 6 )
 texture_disabled = ExtResource( 7 )
-texture_click_mask = ExtResource( 16 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

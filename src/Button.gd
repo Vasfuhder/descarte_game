@@ -66,7 +66,6 @@ func jogar_dados(valor_dado: int):
 		yield(get_tree().create_timer(0.07), "timeout")
 	dado.frame = frame
 	
-	self.get_parent().get_node("dados").set_text("Dados: "+str(valor_dado))
 	pass
 	
 func gerar_pergunta(valor_dado) -> void:
