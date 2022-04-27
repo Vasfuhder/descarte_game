@@ -821,7 +821,6 @@ script = ExtResource( 14 )
 scrolling_speed = 50.0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_mirroring = Vector2( 3000, 0 )
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
